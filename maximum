@@ -1,0 +1,64 @@
+.model small
+.stack 100h
+
+.data
+    num1 dw ?        
+    num2 dw ?        
+    num3 dw ?       
+    maximum dw ?     
+    message db "The maximum number is: $"
+
+.code
+main proc
+    mov ax, @data    
+    mov ds, ax
+
+    
+    mov ah, 01h      
+    int 21h          
+    sub al, 30h      
+    mov num1, ax     
+
+    
+    mov ah, 01h      
+    int 21h          
+    sub al, 30h      
+    mov num2, ax    
+
+    
+    mov ah, 01h     
+    int 21h         
+    sub al, 30h      
+    mov num3, ax     
+
+    
+    mov ax, num1
+    cmp ax, num2
+    jge check_num3 
+    mov ax, num2    
+check_num3:
+   
+    cmp ax, num3
+    jge end_check   
+    mov ax, num3    
+
+end_check:
+   
+    mov maximum, ax 
+
+    mov ah, 09h     
+    lea dx, message
+    int 21h         
+
+    mov ax, maximum 
+    add ax, 30h     
+    mov dl, al      
+    mov ah, 02h    
+    int 21h        
+
+    
+    mov ah, 4Ch     
+    int 21h        
+
+main endp
+end main
