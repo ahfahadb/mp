@@ -1,0 +1,16 @@
+.MODEL SMALL
+
+ .DATA 
+  SUM DW ?  
+  .CODE
+ MOV AX,@DATA
+ MOV DS,AX
+   MAIN PROC
+    MOV AX,120
+    MOV BX,110
+    ADD AX,BX
+    MOV SUM,AX
+    
+     MAIN ENDP
+   END MAIN
+ 
