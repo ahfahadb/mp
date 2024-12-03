@@ -1,0 +1,41 @@
+.MODEL SMALL
+ 
+.DATA
+STR1 DB 'input number is even $'
+STR2 DB 'input number is odd $'
+
+.CODE
+
+MAIN PROC
+ 
+  MOV AX,@DATA
+  MOV DS,AX
+  
+  MOV AH,01h 
+  INT 21h
+  
+  AND AL,0001h
+  
+  CMP AL,0h
+  JE EVEN
+  JNE ODD
+  
+  
+  EVEN:
+    MOV AH,09h 
+    LEA DX,STR1
+    INT 21h
+    JMP EXIT
+            
+  ODD:
+    MOV AH,09h 
+    LEA DX,STR2
+    INT 21h
+    JMP EXIT
+            
+  EXIT:
+    MOV AH,4Ch 
+    INT 21h
+    
+ MAIN ENDP
+END MAIN
